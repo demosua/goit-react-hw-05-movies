@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function getMovies() {
     try {
-      const response = await axios.get('https://api.themoviedb.org/3/trending/movie/week?api_key=1315643545b87f640bd81c2c08cb68dd');
+      const response = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=1315643545b87f640bd81c2c08cb68dd');
       if (response) {return response.data.results;}
       return Promise.reject(new Error(`There are no results for trending movies`));
     } catch (error) {
@@ -10,8 +10,19 @@ async function getMovies() {
     }
 }
 
+async function getMovieDetails(movie_id) {
+  try {
+    const response = await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=1315643545b87f640bd81c2c08cb68dd&language=en-US`);
+    if (response) {return response.data;}
+    return Promise.reject(new Error(`There are no results for trending movies`));
+  } catch (error) {
+    return error;
+  }
+}
+
 const api = {
   getMovies,
+  getMovieDetails,
 };
 
 export default api;

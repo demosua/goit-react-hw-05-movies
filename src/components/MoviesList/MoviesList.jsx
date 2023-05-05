@@ -1,14 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import api from '../../api/api';
 
-const MoviesList = () => {
-  const [movies, setMovies] = useState([]);
-  
-  api.getMovies()
-    .then(result => {setMovies(result)})
-    .catch(error => {console.log(error.message)})
-
+const MoviesList = ({ movies }) => {
   return (
     <ul>
     {movies.map((movie) => (
