@@ -1,3 +1,5 @@
+
+
 const MovieDetails = ({ movie }) => {
   const { title, overview, genres, vote_average, release_date, poster_path } = movie;
   const movieYear = release_date.split('-')[0];
@@ -5,7 +7,8 @@ const MovieDetails = ({ movie }) => {
   const movieGenres = genres.flatMap(genre => genre.name).join(", ");
 
   return (
-    <div>
+
+      <div>
       <img src={movieImage} alt="the-king" width={200}/>
       <div>movie - {title}</div>
       <div>{movieYear} </div>
@@ -13,8 +16,8 @@ const MovieDetails = ({ movie }) => {
       <div>genres - {movieGenres}</div>
       <div>User Score {vote_average * 10}%</div>
     </div>
+ 
   );
 };
 
 export default MovieDetails;
-// 504949

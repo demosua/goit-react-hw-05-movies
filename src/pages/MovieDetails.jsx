@@ -6,7 +6,7 @@ import api from '../api/api';
 import { Link, Outlet } from "react-router-dom";
 
 const MovieDetails = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [status, setStatus] = useState('idle');
 
@@ -14,7 +14,7 @@ const MovieDetails = () => {
     async function fetchMovieDetails(){
       setStatus('pending');
       try{
-        const movie = await api.getMovieDetails(id);
+        const movie = await api.getMovieDetails(movieId);
         setMovie(movie);
       }catch{
         setStatus('rejected');
@@ -23,23 +23,17 @@ const MovieDetails = () => {
       }
     }
     fetchMovieDetails();
-  }, [id])
+  }, [movieId])
 
   return (
+  
     <>
       {status === 'rejected' && <div></div>}
       {status === 'pending' && <Loader />}
-      {status === 'resolved' && (
-        <>
-          <MovieInfo movie={movie} />
-          <ul>
-            <li><Link to="cast">cast</Link></li>
-            <li><Link to="reviews">reviews</Link></li>
-          </ul>
-          <Outlet />
+      <>
+        {status === 'resolved' && <MovieInfo movie={movie} />}
+        {status === 'resolved' && <Outlet/>}
       </>
-      )}
-      
     </>
   );
 }
