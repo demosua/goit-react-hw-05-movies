@@ -1,11 +1,11 @@
 import { useState, useEffect} from 'react';
-import { useParams, Outlet } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom";
 import Loader from '../components/Loader'
 import  MovieInfo from '../components/MovieInfo'
 import api from '../api/api';
 
 const MovieDetails = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [status, setStatus] = useState('idle');
 
@@ -13,7 +13,7 @@ const MovieDetails = () => {
     async function fetchMovieDetails(){
       setStatus('pending');
       try{
-        const movie = await api.getMovieDetails(id);
+        const movie = await api.getMovieDetails(movieId);
         setMovie(movie);
       }catch{
         setStatus('rejected');
@@ -22,16 +22,22 @@ const MovieDetails = () => {
       }
     }
     fetchMovieDetails();
-  }, [id])
+  }, [movieId])
 
   return (
+  
     <>
       {status === 'rejected' && <div></div>}
       {status === 'pending' && <Loader />}
-      <>
-        {status === 'resolved' && <MovieInfo movie={movie} />}
-        {status === 'resolved' && <Outlet/>}
-      </>
+
+      {status === 'resolved' && (<>
+      <MovieInfo movie={movie} />
+      <ul>
+        <li><Link to="cast">Cast</Link></li>
+      </ul>
+      <Outlet/>
+      </>)}
+
     </>
   );
 };

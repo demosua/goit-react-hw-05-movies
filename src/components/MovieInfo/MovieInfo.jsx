@@ -1,3 +1,5 @@
+
+
 const MovieDetails = ({ movie }) => {
   console.log(movie)
   const { title, overview, genres, vote_average, release_date, poster_path } = movie;
@@ -7,15 +9,16 @@ const MovieDetails = ({ movie }) => {
 
   return (
     <>
+    <div>
       <img src={movieImage} alt="the-king" width={200}/>
       <div>movie - {title}</div>
       <div>{movieYear} </div>
       <div>overview - {overview}</div>
       <div>genres - {movieGenres}</div>
       <div>User Score {vote_average*10}%</div>
+    </div>
     </>
   );
 };
 
 export default MovieDetails;
-// 504949
