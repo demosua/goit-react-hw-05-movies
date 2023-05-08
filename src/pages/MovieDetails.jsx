@@ -1,8 +1,9 @@
-import { useState, useEffect} from 'react';
-import { useParams, Outlet } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import Loader from '../components/Loader'
 import  MovieInfo from '../components/MovieInfo'
 import api from '../api/api';
+import { Link, Outlet } from "react-router-dom";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -28,12 +29,18 @@ const MovieDetails = () => {
     <>
       {status === 'rejected' && <div></div>}
       {status === 'pending' && <Loader />}
-      <>
-        {status === 'resolved' && <MovieInfo movie={movie} />}
-        {status === 'resolved' && <Outlet/>}
+      {status === 'resolved' && (
+        <>
+          <MovieInfo movie={movie} />
+          <ul>
+            <li><Link to="cast">cast</Link></li>
+            <li><Link to="reviews">reviews</Link></li>
+          </ul>
+          <Outlet />
       </>
+      )}
+      
     </>
   );
-};
-
+}
 export default MovieDetails;
