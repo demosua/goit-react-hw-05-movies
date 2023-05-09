@@ -11,7 +11,7 @@ const useFetchMovies = () => {
     async function fetchMovies(){
       setStatus('pending');
       try{
-        const movies = await api.getMovies();
+        const movies = await api.getTrendingMovies();
         setMovies(movies);
       }catch{
         setStatus('rejected');

@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const MovieDetails = ({ movie }) => {
   const { title, overview, genres, vote_average, release_date, poster_path } = movie;
@@ -8,13 +8,17 @@ const MovieDetails = ({ movie }) => {
 
   return (
 
-      <div>
+    <div>
       <img src={movieImage} alt="the-king" width={200}/>
       <div>movie - {title}</div>
       <div>{movieYear} </div>
       <div>overview - {overview}</div>
       <div>genres - {movieGenres}</div>
       <div>User Score {vote_average * 10}%</div>
+        <ul>
+          <li><Link to="cast">cast</Link></li>
+          <li><Link to="reviews">reviews</Link></li>
+        </ul>
     </div>
  
   );
