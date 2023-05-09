@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Outlet } from "react-router-dom";
 import Loader from '../components/Loader'
-import MovieInfo from '../components/MovieInfo'
+import  MovieInfo from '../components/MovieInfo'
 import api from '../api/api';
 
 const MovieDetails = () => {
@@ -28,7 +28,7 @@ const MovieDetails = () => {
     <>
       {status === 'rejected' && <div></div>}
       {status === 'pending' && <Loader />}
-      {status === 'resolved' && (<><MovieInfo movie={movie} /><Outlet/></>)}
+      {status === 'resolved' && (<><MovieInfo movie={movie} /><Outlet /></>)}
     </>
   );
 }
