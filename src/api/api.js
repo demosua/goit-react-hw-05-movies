@@ -18,7 +18,7 @@ async function getMoviesSearch(movie) {
   try {
     const url = `search/movie?api_key=${API_KEY}&language=en-US&query=${movie}&page=1&include_adult=false`;
     const response = await axios.get(url);
-    if (response) {return response.data.results;}
+    if (response.data.results.length > 0) {return response.data.results;}
       return Promise.reject(new Error(`There are no results for movie you are searching for`));
   } catch (error) {
     return error;
@@ -40,8 +40,8 @@ async function getMovieCredits(movie_id) {
   try {
     const url = `movie/${movie_id}/credits?api_key=${API_KEY}`;
     const response = await axios.get(url);
-    if (response) {return response.data;}
-      return Promise.reject(new Error(`There are no results for trending movies`));
+    if(response) {return response.data;}
+      return Promise.reject(new Error(`Error occured while fetching casting actors`));
   } catch (error) {
     return error;
   }
@@ -52,7 +52,7 @@ async function getMovieReviews(movie_id) {
     const url = `movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=1`;
     const response = await axios.get(url);
     if (response) {return response.data.results;}
-      return Promise.reject(new Error(`There are no results for trending movies`));
+      return Promise.reject(new Error(`Error occured while fetching reviews`));
   } catch (error) {
     return error;
   }

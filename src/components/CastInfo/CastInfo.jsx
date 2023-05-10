@@ -1,9 +1,9 @@
-const CastInfo = ({ credits }) => {
-  const actors = credits.cast.filter(actor => actor.known_for_department
- === "Acting");
- console.log(actors[0]);
-  return (
+import propTypes from 'prop-types';
 
+const CastInfo = ({ credits }) => {
+  const actors = credits.cast.filter(actor => actor.known_for_department === "Acting");
+
+  return (
     <div>
         <ul>
           {actors.map(actor => 
@@ -23,3 +23,21 @@ const CastInfo = ({ credits }) => {
 };
 
 export default CastInfo;
+
+CastInfo.propTypes = {
+  credits: propTypes.shape({
+      id: propTypes.number.isRequired,
+      cast: propTypes.arrayOf(
+        propTypes.shape({
+          name: propTypes.string.isRequired,
+          character: propTypes.string.isRequired,
+          profile_path: function(props, propName, componentName) {
+            const propValue = props[propName]
+              if (propValue === null) return
+              if (typeof propValue === 'string') return
+              return new Error(`${componentName} only accepts null or string`)
+          }
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
+}

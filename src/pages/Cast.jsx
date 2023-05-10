@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Loader from '../components/Loader'
 import  CastInfo from '../components/CastInfo'
 import api from '../api/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -15,8 +17,9 @@ const Cast = () => {
       try{
         const credits = await api.getMovieCredits(movieId);
         setCredits(credits);
-      }catch{
-        setStatus('rejected');
+      } catch(error) {
+          setStatus('rejected');
+          toast.error(error.message);
       }finally{
         setStatus('resolved');
       }
@@ -26,7 +29,7 @@ const Cast = () => {
 
   return (
     <>
-      {status === 'rejected' && <div></div>}
+      {status === 'rejected' && <ToastContainer autoClose={1000} />}
       {status === 'pending' && <Loader />}
       {status === 'resolved' && <CastInfo credits={credits} />}
     </>

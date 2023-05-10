@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import propTypes from 'prop-types';
 
 const MovieDetails = ({ movie }) => {
   const { title, overview, genres, vote_average, release_date, poster_path } = movie;
   const movieYear = `(${release_date.split('-')[0]})`;
   const movieImage = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${poster_path}`;
   const movieGenres = genres.flatMap(genre => genre.name).join(", ");
-  const moviePercent = `${(Number(vote_average) * 10).toFixed(2)}%`
+  const moviePercent = `${(Number(vote_average) * 10).toFixed(0)}%`
   return (
 
     <div>
@@ -24,3 +25,13 @@ const MovieDetails = ({ movie }) => {
 };
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  movie: propTypes.shape({
+      title: propTypes.string.isRequired,
+      overview: propTypes.string.isRequired,
+      vote_average: propTypes.number.isRequired,
+      release_date: propTypes.string.isRequired,
+      poster_path: propTypes.string.isRequired,
+    }).isRequired,
+}

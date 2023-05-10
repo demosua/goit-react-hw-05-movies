@@ -4,7 +4,8 @@ import  MoviesList from '../components/MoviesList'
 import Loader from '../components/Loader'
 import api from '../api/api';
 import { Formik, Form, Field } from 'formik';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Movies = () => {
   const [moviesList, setMoviesList] = useState([]);
@@ -19,6 +20,7 @@ const Movies = () => {
         console.log(searchQuery);
         const moviesList = await api.getMoviesSearch(searchQuery);
         setMoviesList(moviesList);
+        toast.error("de");
         console.log(moviesList);
       }catch{
         setStatus('rejected');
@@ -36,6 +38,7 @@ const Movies = () => {
 
   return (
     <div>
+      {status === 'rejected' && <ToastContainer autoClose={1000} />}
       <Formik initialValues={{ query: '' }} onSubmit={handleSubmit}>
         <Form>
           <Field name="query" type="text" autoComplete="off" placeholder="Enter movie you'd like to find" autoFocus></Field>
