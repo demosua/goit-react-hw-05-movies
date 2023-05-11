@@ -1,5 +1,5 @@
 import {useState, useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import  MoviesList from '../components/MoviesList'
 import Loader from '../components/Loader'
 import api from '../api/api';
@@ -17,13 +17,11 @@ const Movies = () => {
     async function fetchMovieSearch(){
       setStatus('pending');
       try{
-        console.log(searchQuery);
         const moviesList = await api.getMoviesSearch(searchQuery);
         setMoviesList(moviesList);
-        toast.error("de");
-        console.log(moviesList);
-      }catch{
+      }catch(error){
         setStatus('rejected');
+        toast.error(error);
       }finally{
         setStatus('resolved');
       }
@@ -47,6 +45,7 @@ const Movies = () => {
         </button>
         </Form>
       </Formik>
+      {status === 'pending' && <Loader />}
       {status === 'resolved' && <MoviesList movies={moviesList}/>}
     </div>
   );

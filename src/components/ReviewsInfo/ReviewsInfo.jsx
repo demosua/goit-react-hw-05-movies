@@ -1,4 +1,5 @@
 import {} from './ReviewsInfo.styled';
+import propTypes from 'prop-types';
 
 const ReviewsInfo = ({ reviews }) => {
   return (
@@ -6,7 +7,7 @@ const ReviewsInfo = ({ reviews }) => {
       {reviews.length > 0
         ? (
           <ul>
-            {reviews.map(review => 
+            {reviews.map(review =>
               <li key ={review.id}>
                 <p>Author: {review.author_details.username}</p>
                 {review.content}
@@ -20,3 +21,14 @@ const ReviewsInfo = ({ reviews }) => {
 };
 
 export default ReviewsInfo;
+
+ReviewsInfo.propTypes = {
+  reviews: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.string.isRequired,
+      author_details: propTypes.shape({
+        username: propTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
+}
