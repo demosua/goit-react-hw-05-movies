@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import Loader from '../components/Loader'
-import  ReviewsInfo from '../components/ReviewsInfo'
+import Loader from '../components/Loader';
+import  ReviewsInfo from '../components/ReviewsInfo';
 import api from '../api/api';
 
 const Reviews = () => {

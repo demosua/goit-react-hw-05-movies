@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
-import  MoviesList from '../components/MoviesList'
-import Loader from '../components/Loader'
+import  MoviesList from '../components/MoviesList';
+import Loader from '../components/Loader';
 import api from '../api/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

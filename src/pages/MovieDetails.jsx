@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, Outlet } from "react-router-dom";
-import Loader from '../components/Loader'
-import  MovieInfo from '../components/MovieInfo'
+import { useParams, useLocation } from "react-router-dom";
+import Loader from '../components/Loader';
+import  MovieInfo from '../components/MovieInfo';
 import api from '../api/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,7 +34,11 @@ const MovieDetails = () => {
     <>
       {status === 'rejected' && <ToastContainer autoClose={1000} />}
       {status === 'pending' && <Loader />}
-      {status === 'resolved' && (<><BackLink to={backLinkHref}>Back to movies</BackLink><MovieInfo movie={movie} /><Outlet /></>)}
+      {status === 'resolved' && (<>
+      <BackLink to={backLinkHref}>Back to movies</BackLink>
+      <MovieInfo movie={movie} />
+
+      </>)}
     </>
   );
 }
