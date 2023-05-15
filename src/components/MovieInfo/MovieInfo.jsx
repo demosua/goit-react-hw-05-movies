@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Link, Outlet } from "react-router-dom";
 import propTypes from 'prop-types';
-import { Wrapper, Ul, Li } from './MovieInfo.styled';
+import { Wrapper, Ul, Li, Mov } from './MovieInfo.styled';
 import Loader from '../../components/Loader';
 
 const MovieDetails = ({ movie }) => {
@@ -12,25 +12,29 @@ const MovieDetails = ({ movie }) => {
   const moviePercent = `${(Number(vote_average) * 10).toFixed(0)}%`
   
   return (
-
+<>
     <Wrapper>
-      <div>
-          <img src={movieImage} alt={title} width={200}/>
-          <div>movie - {title} {movieYear ? movieYear : ""}</div>
-          <div>overview - {overview}</div>
-          <div>genres - {movieGenres}</div>
-          <div>{moviePercent ? `User Score ${moviePercent}` : "0"}</div>
-          <p>Additional information</p>
-      </div>
+      <Mov>
+        <img src={movieImage} alt={title} width={200}/>
+        <ul>
+          <Li><h2>{title} {movieYear ? movieYear : ""}</h2></Li>
+          <Li><h4>overview - {overview}</h4></Li>
+          <Li><p>genres - {movieGenres}</p></Li>
+          <Li><p>{moviePercent ? `User Score ${moviePercent}` : "0"}</p></Li>
+          <Li></Li>
+        </ul>
+      </Mov>
+    </Wrapper>
+
+        <p>Additional information</p>
             <Ul>
               <Li><Link to="cast">cast</Link></Li>
               <Li><Link to="reviews">reviews</Link></Li>
             </Ul>
             <Suspense fallback={<Loader />}>
               <Outlet />
-            </Suspense>
-    </Wrapper>
- 
+        </Suspense>
+    </>
   );
 };
 
