@@ -18,21 +18,21 @@ const MovieDetails = ({ movie }) => {
         <img src={movieImage} alt={title} width={200}/>
         <ul>
           <Li><h2>{title} {movieYear ? movieYear : ""}</h2></Li>
-          <Li><h4>overview - {overview}</h4></Li>
-          <Li><p>genres - {movieGenres}</p></Li>
+          <Li><h4>{overview}</h4></Li>
+          <Li><p>{movieGenres}</p></Li>
           <Li><p>{moviePercent ? `User Score ${moviePercent}` : "0"}</p></Li>
           <Li></Li>
         </ul>
       </Mov>
     </Wrapper>
 
-        <p>Additional information</p>
-            <Ul>
-              <Li><Link to="cast">cast</Link></Li>
-              <Li><Link to="reviews">reviews</Link></Li>
-            </Ul>
-            <Suspense fallback={<Loader />}>
-              <Outlet />
+    <p>Additional information</p>
+        <Ul>
+          <Li><Link to="cast">cast</Link></Li>
+          <Li><Link to="reviews">reviews</Link></Li>
+        </Ul>
+        <Suspense fallback={<Loader />}>
+          <Outlet />
         </Suspense>
     </>
   );
