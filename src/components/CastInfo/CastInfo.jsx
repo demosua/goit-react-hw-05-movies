@@ -1,12 +1,13 @@
 import propTypes from 'prop-types';
 import {Wrapper, Ul} from './CastInfo.styled';
 const CastInfo = ({ credits }) => {
-  const actors = credits.cast.filter(actor => actor.known_for_department === "Acting");
+const actors = credits.cast.filter(actor => actor.known_for_department === "Acting");
 
   return (
     <Wrapper>
         <Ul>
-          {actors.map(actor => 
+          {actors.length > 0
+            ? actors.map(actor =>
             <li key ={actor.id}>
               <p>{actor.profile_path
               ? <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${actor.profile_path}`} alt={actor.name} width={40}/>
@@ -14,8 +15,8 @@ const CastInfo = ({ credits }) => {
               `} alt={actor.name} width={40}/>}</p>
               <p>{actor.name}</p>
               <p>{actor.character}</p>
-            </li>
-          )}
+            </li>)
+          : <p>We don't have any cast info for this movie yet.</p>}
         </Ul>
     </Wrapper>
  

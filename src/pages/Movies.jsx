@@ -20,6 +20,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query') ?? '';
   
+
   useEffect(() => {
     async function fetchMovieSearch(){
       setStatus('pending');
